@@ -1,0 +1,7 @@
+sherubtse{
+    transform: translate(50px,50px);
+    transform: rotate(45deg);
+    transform: scale(2, 3);
+    transform:skew(20deg,10deg);
+    transform:matrix(2, -0.3,0, 1, 2, 2);
+}

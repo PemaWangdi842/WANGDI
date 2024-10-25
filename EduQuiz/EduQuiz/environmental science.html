@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduQuiz - Environmental Science Quiz</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Styling for scrollable quiz container */
+        .scrollable-container {
+            max-height: 300px; /* Adjustable value for height */
+            overflow-y: auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .question {
+            background: #fff;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+        #results {
+            display: none;
+            background: #fff;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="EduQuizlogo.png" alt="EduQuiz Logo">
+            <h1>Edu Quiz - Environmental Science Quiz</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="Home.html">Home</a></li>
+                <li><a href="Quizzes.html">Quizzes</a></li>
+                <li><a href="Contact.html">Contact</a></li>
+                <li><a href="Feedback.html">Feedback</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2 id="subject-name">Environmental Science Quiz</h2>
+        <div id="timer">Time left: <span id="time">30:00</span></div> <!-- Timer display -->
+        <form id="quiz-form">
+            <div class="scrollable-container" id="questions-container">
+                <!-- Questions will be populated here -->
+            </div>
+            <button type="button" id="add-question-btn">Add Question</button> <!-- Add Question Button -->
+            <button type="submit">Submit Quiz</button>
+        </form>
+
+        <div id="results">
+            <h3>Your Results:</h3>
+            <p id="score"></p>
+            <ul id="wrongAnswers"></ul>
+        </div>
+    </main>
+
+    <footer>
+        <img src="EduQuizlogo.png" alt="EduQuiz Logo">
+        <p>EduQuiz Developers<br>
+        Sherubtse College<br>
+        Trashigang, BHUTAN<br>
+        justlittetoxic@gmail.com<br>
+        17948009</p>
+    </footer>
+
+    <script>
+        // Timer function
+        let timeLeft = 1800; // Time in seconds (30 minutes)
+        const timerDisplay = document.getElementById('time');
+
+        const timer = setInterval(() => {
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                document.getElementById('quiz-form').dispatchEvent(new Event('submit')); // Auto submit the quiz when time runs out
+            } else {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+                timeLeft--;
+            }
+        }, 1000); // Update every second
+
+        const environmentalScienceQuestions = [
+            { question: "What is the main greenhouse gas emitted by human activities?", answers: ["Carbon Dioxide", "Methane", "Nitrous Oxide", "Ozone"], correct: "Carbon Dioxide" },
+            { question: "Which layer of the Earth’s atmosphere contains the ozone layer?", answers: ["Troposphere", "Stratosphere", "Mesosphere", "Thermosphere"], correct: "Stratosphere" },
+            { question: "What is biodiversity?", answers: ["Variety of life in the world", "Study of living organisms", "Ecosystem health", "Conservation of species"], correct: "Variety of life in the world" },
+            { question: "Which process describes the conversion of liquid water to vapor?", answers: ["Evaporation", "Condensation", "Precipitation", "Transpiration"], correct: "Evaporation" },
+            { question: "What is acid rain?", answers: ["Rain with a low pH", "Rain that falls during a drought", "Rain that contains nutrients", "Rain that is warmer than usual"], correct: "Rain with a low pH" },
+            { question: "What does the term 'sustainability' refer to?", answers: ["Using resources without depleting them", "Increasing production at all costs", "Environmental conservation only", "Non-renewable resources"], correct: "Using resources without depleting them" },
+            { question: "Which of the following is a renewable resource?", answers: ["Coal", "Natural Gas", "Wind", "Nuclear"], correct: "Wind" },
+            { question: "What is the primary cause of deforestation?", answers: ["Urbanization", "Agricultural expansion", "Logging", "All of the above"], correct: "All of the above" },
+            { question: "What is the term for the maximum population size that an environment can sustain?", answers: ["Carrying capacity", "Ecological footprint", "Population density", "Sustainable yield"], correct: "Carrying capacity" },
+            { question: "Which of the following gases is responsible for ozone depletion?", answers: ["Carbon Dioxide", "Chlorofluorocarbons (CFCs)", "Methane", "Nitrous Oxide"], correct: "Chlorofluorocarbons (CFCs)" },
+            { question: "What is an ecosystem?", answers: ["Community of living organisms and their environment", "Study of species", "The global environment", "Population of a single species"], correct: "Community of living organisms and their environment" },
+            { question: "What is the primary source of freshwater?", answers: ["Rivers", "Lakes", "Glaciers", "Groundwater"], correct: "Glaciers" },
+            { question: "Which of the following best describes climate change?", answers: ["Long-term alteration of temperature and typical weather patterns", "Short-term weather changes", "Only human-induced warming", "Seasonal changes"], correct: "Long-term alteration of temperature and typical weather patterns" },
+            { question: "What is the main purpose of conservation?", answers: ["To protect biodiversity", "To reduce pollution", "To promote tourism", "To enhance agriculture"], correct: "To protect biodiversity" },
+            { question: "What is the main consequence of global warming?", answers: ["Melting polar ice caps", "Increase in biodiversity", "Decrease in natural disasters", "Stable climate patterns"], correct: "Melting polar ice caps" },
+            { question: "What is the term for the gradual increase in the Earth's average temperature?", answers: ["Global warming", "Climate change", "Greenhouse effect", "Ozone depletion"], correct: "Global warming" },
+            { question: "What is the largest source of marine pollution?", answers: ["Plastic waste", "Sewage", "Oil spills", "Heavy metals"], correct: "Plastic waste" },
+            { question: "Which of the following is an example of non-renewable energy?", answers: ["Solar", "Wind", "Coal", "Hydropower"], correct: "Coal" },
+            { question: "What is the primary goal of environmental regulations?", answers: ["To protect public health and the environment", "To promote economic growth", "To control population", "To reduce energy consumption"], correct: "To protect public health and the environment" },
+            { question: "What is habitat destruction?", answers: ["Loss of natural habitat", "Formation of new habitats", "Preservation of ecosystems", "Increase in biodiversity"], correct: "Loss of natural habitat" }
+        ];
+
+        const newQuestions = []; // Array to store newly added questions
+
+        // Load questions into the quiz
+        function loadQuestions() {
+            const container = document.getElementById('questions-container');
+            environmentalScienceQuestions.forEach((q, index) => {
+                const questionDiv = createQuestionElement(q, index);
+                container.appendChild(questionDiv);
+            });
+        }
+
+        // Create question element
+        function createQuestionElement(q, index) {
+            const questionDiv = document.createElement('div');
+            questionDiv.className = 'question';
+            questionDiv.innerHTML = `
+                <p>${index + 1}. ${q.question}</p>
+            `;
+            q.answers.forEach(answer => {
+                questionDiv.innerHTML += `
+                    <input type="radio" name="question${index}" value="${answer}" required>
+                    <label>${answer}</label><br>
+                `;
+            });
+            return questionDiv;
+        }
+
+        // Handle form submission
+        document.getElementById('quiz-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            clearInterval(timer); // Stop the timer
+            calculateScore();
+        });
+
+        // Calculate and display score
+        function calculateScore() {
+            const score = environmentalScienceQuestions.length; // Total questions
+            let correctAnswers = 0;
+            const wrongAnswers = [];
+
+            environmentalScienceQuestions.forEach((q, index) => {
+                const selectedAnswer = document.querySelector(`input[name="question${index}"]:checked`);
+                if (selectedAnswer) {
+                    if (selectedAnswer.value === q.correct) {
+                        correctAnswers++;
+                    } else {
+                        wrongAnswers.push(`Q${index + 1}: Correct Answer: ${q.correct}`);
+                    }
+                }
+            });
+
+            // Display results
+            document.getElementById('score').textContent = `You scored ${correctAnswers} out of ${score}.`;
+            document.getElementById('wrongAnswers').innerHTML = wrongAnswers.map(item => `<li>${item}</li>`).join('');
+            document.getElementById('results').style.display = 'block';
+        }
+
+        // Add a new question
+        document.getElementById('add-question-btn').addEventListener('click', function() {
+            const questionText = prompt("Enter the question:");
+            const answerText = prompt("Enter the answer choices (separate by commas):").split(',');
+            const correctAnswer = prompt("Enter the correct answer:");
+
+            if (questionText && answerText.length && correctAnswer) {
+                const newQuestion = {
+                    question: questionText,
+                    answers: answerText.map(answer => answer.trim()), // Trim whitespace
+                    correct: correctAnswer.trim() // Trim whitespace
+                };
+                environmentalScienceQuestions.push(newQuestion);
+                const container = document.getElementById('questions-container');
+                const questionDiv = createQuestionElement(newQuestion, environmentalScienceQuestions.length - 1);
+                container.appendChild(questionDiv);
+            } else {
+                alert("Please fill in all fields.");
+            }
+        });
+
+        // Load questions on page load
+        window.onload = loadQuestions;
+    </script>
+</body>
+</html>

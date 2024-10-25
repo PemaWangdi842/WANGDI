@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduQuiz</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Styling for scrollable quiz container */
+        .scrollable-container {
+            max-height: 400px; /* You can adjust this value as needed */
+            overflow-y: auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        .question {
+            margin-bottom: 30px; /* Increased margin for better spacing between questions */
+        }
+
+        label {
+            display: block; /* Ensures each label is on a new line */
+            margin: 5px 0; /* Adds spacing between labels */
+        }
+
+        #timer {
+            font-size: 1.5em; /* Increased font size for better visibility */
+            margin-bottom: 20px; /* Space between timer and quiz */
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .question {
+            background: #fff;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+        #results {
+            display: none;
+            background: #fff;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="EduQuizlogo.png" alt="EduQuiz Logo">
+            <h1>Edu Quiz</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="Home.html">Home</a></li>
+                <li><a href="Quizzes.html">Quizzes</a></li>
+                <li><a href="Contact.html">Contact</a></li>
+                <li><a href="Feedback.html">Feedback</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main content -->
+    <main>
+        <h2 id="subject-name"></h2>
+        <div id="timer">Time left: <span id="time">20:00</span></div> <!-- Timer display -->
+        <form id="quiz-form">
+            <!-- Scrollable container for quiz questions -->
+            <div class="scrollable-container">
+                <!-- Question 1 -->
+                <div class="question">
+                    <p>1. Which of the following sentences is grammatically correct?</p>
+                    <label><input type="radio" name="q1" value="b"> She goes to school every day.</label>
+                    <label><input type="radio" name="q1" value="a"> She go to school every day.</label>
+                    <label><input type="radio" name="q1" value="c"> She gone to school every day.</label>
+                    <label><input type="radio" name="q1" value="d"> She going to school every day.</label>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question">
+                    <p>2. Identify the verb in the following sentence: "The cat chased the mouse."</p>
+                    <label><input type="radio" name="q2" value="b"> chased</label>
+                    <label><input type="radio" name="q2" value="a"> cat</label>
+                    <label><input type="radio" name="q2" value="c"> mouse</label>
+                    <label><input type="radio" name="q2" value="d"> the</label>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question">
+                    <p>3. Which word is an adjective? "The tall building is impressive."</p>
+                    <label><input type="radio" name="q3" value="c"> tall</label>
+                    <label><input type="radio" name="q3" value="b"> impressive</label>
+                    <label><input type="radio" name="q3" value="a"> building</label>
+                    <label><input type="radio" name="q3" value="d"> is</label>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question">
+                    <p>4. Choose the correct form: "He has ____ apples than she does."</p>
+                    <label><input type="radio" name="q4" value="a"> more</label>
+                    <label><input type="radio" name="q4" value="b"> many</label>
+                    <label><input type="radio" name="q4" value="c"> most</label>
+                    <label><input type="radio" name="q4" value="d"> much</label>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question">
+                    <p>5. Identify the subject in the sentence: "The dog barks loudly."</p>
+                    <label><input type="radio" name="q5" value="a"> dog</label>
+                    <label><input type="radio" name="q5" value="b"> barks</label>
+                    <label><input type="radio" name="q5" value="c"> loudly</label>
+                    <label><input type="radio" name="q5" value="d"> the</label>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question">
+                    <p>6. Which sentence uses the past tense correctly?</p>
+                    <label><input type="radio" name="q6" value="c"> I went to the store.</label>
+                    <label><input type="radio" name="q6" value="a"> I will go to the store.</label>
+                    <label><input type="radio" name="q6" value="b"> I gone to the store.</label>
+                    <label><input type="radio" name="q6" value="d"> I goes to the store.</label>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question">
+                    <p>7. What is the correct plural form of "child"?</p>
+                    <label><input type="radio" name="q7" value="b"> children</label>
+                    <label><input type="radio" name="q7" value="a"> childes</label>
+                    <label><input type="radio" name="q7" value="c"> childs</label>
+                    <label><input type="radio" name="q7" value="d"> childen</label>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question">
+                    <p>8. Which of the following sentences is a compound sentence?</p>
+                    <label><input type="radio" name="q8" value="b"> I like swimming, and I also enjoy running.</label>
+                    <label><input type="radio" name="q8" value="a"> I like to swim.</label>
+                    <label><input type="radio" name="q8" value="c"> Swimming is fun.</label>
+                    <label><input type="radio" name="q8" value="d"> She loves pizza.</label>
+                </div>
+
+                <!-- Question 9 -->
+                <div class="question">
+                    <p>9. Identify the adverb in the sentence: "She sings beautifully."</p>
+                    <label><input type="radio" name="q9" value="b"> beautifully</label>
+                    <label><input type="radio" name="q9" value="a"> sings</label>
+                    <label><input type="radio" name="q9" value="c"> she</label>
+                    <label><input type="radio" name="q9" value="d"> the</label>
+                </div>
+
+                <!-- Question 10 -->
+                <div class="question">
+                    <p>10. Choose the correct conjunction: "I wanted to go to the party, ____ I was too tired."</p>
+                    <label><input type="radio" name="q10" value="a"> but</label>
+                    <label><input type="radio" name="q10" value="b"> and</label>
+                    <label><input type="radio" name="q10" value="c"> or</label>
+                    <label><input type="radio" name="q10" value="d"> so</label>
+                </div>
+
+                <!-- Question 11 -->
+                <div class="question">
+                    <p>11. What is the correct form of the verb? "They ____ (go) to the park yesterday."</p>
+                    <label><input type="radio" name="q11" value="b"> went</label>
+                    <label><input type="radio" name="q11" value="a"> gone</label>
+                    <label><input type="radio" name="q11" value="c"> go</label>
+                    <label><input type="radio" name="q11" value="d"> going</label>
+                </div>
+
+                <!-- Question 12 -->
+                <div class="question">
+                    <p>12. Choose the correct preposition: "She is fond ____ music."</p>
+                    <label><input type="radio" name="q12" value="a"> of</label>
+                    <label><input type="radio" name="q12" value="b"> in</label>
+                    <label><input type="radio" name="q12" value="c"> at</label>
+                    <label><input type="radio" name="q12" value="d"> on</label>
+                </div>
+
+                <!-- Question 13 -->
+                <div class="question">
+                    <p>13. Identify the correct form: "This is ____ dog."</p>
+                    <label><input type="radio" name="q13" value="a"> dogs' owner</label>
+                    <label><input type="radio" name="q13" value="b"> dogs owner</label>
+                    <label><input type="radio" name="q13" value="c"> the dog's owner</label>
+                    <label><input type="radio" name="q13" value="d"> the dog owner</label>
+                </div>
+
+                <!-- Question 14 -->
+                <div class="question">
+                    <p>14. Identify the correct form of the adjective: "This is the ____ book I have ever read."</p>
+                    <label><input type="radio" name="q14" value="b"> best</label>
+                    <label><input type="radio" name="q14" value="a"> good</label>
+                    <label><input type="radio" name="q14" value="c"> better</label>
+                    <label><input type="radio" name="q14" value="d"> well</label>
+                </div>
+
+                <!-- Question 15 -->
+                <div class="question">
+                    <p>15. What is the opposite of "hot"?</p>
+                    <label><input type="radio" name="q15" value="a"> warm</label>
+                    <label><input type="radio" name="q15" value="b"> cold</label>
+                    <label><input type="radio" name="q15" value="c"> cool</label>
+                    <label><input type="radio" name="q15" value="d"> freeze</label>
+                </div>
+
+                <!-- Question 16 -->
+                <div class="question">
+                    <p>16. Which word is a synonym for "happy"?</p>
+                    <label><input type="radio" name="q16" value="a"> joyful</label>
+                    <label><input type="radio" name="q16" value="b"> sad</label>
+                    <label><input type="radio" name="q16" value="c"> angry</label>
+                    <label><input type="radio" name="q16" value="d"> bored</label>
+                </div>
+
+                <!-- Question 17 -->
+                <div class="question">
+                    <p>17. Choose the correct article: "___ apple a day keeps the doctor away."</p>
+                    <label><input type="radio" name="q17" value="a"> A</label>
+                    <label><input type="radio" name="q17" value="b"> An</label>
+                    <label><input type="radio" name="q17" value="c"> The</label>
+                    <label><input type="radio" name="q17" value="d"> Some</label>
+                </div>
+
+                <!-- Question 18 -->
+                <div class="question">
+                    <p>18. What is the comparative form of "big"?</p>
+                    <label><input type="radio" name="q18" value="a"> bigger</label>
+                    <label><input type="radio" name="q18" value="b"> biggest</label>
+                    <label><input type="radio" name="q18" value="c"> more big</label>
+                    <label><input type="radio" name="q18" value="d"> biger</label>
+                </div>
+
+                <!-- Question 19 -->
+                <div class="question">
+                    <p>19. Which sentence is in passive voice?</p>
+                    <label><input type="radio" name="q19" value="b"> The book was read by her.</label>
+                    <label><input type="radio" name="q19" value="a"> She read the book.</label>
+                    <label><input type="radio" name="q19" value="c"> She is reading the book.</label>
+                    <label><input type="radio" name="q19" value="d"> She has read the book.</label>
+                </div>
+
+                <!-- Question 20 -->
+                <div class="question">
+                    <p>20. Identify the correct form: "If I ____ you, I would apologize."</p>
+                    <label><input type="radio" name="q20" value="a"> were</label>
+                    <label><input type="radio" name="q20" value="b"> was</label>
+                    <label><input type="radio" name="q20" value="c"> am</label>
+                    <label><input type="radio" name="q20" value="d"> be</label>
+                </div>
+            </div>
+            <button type="button" id="submit-btn">Submit</button>
+        </form>
+
+        <!-- Results Section -->
+        <div id="result" style="display: none;"></div>
+    </main>
+
+    <footer>
+        <img src="EduQuizlogo.png" alt="EduQuiz Logo">
+        <p>EduQuiz Developers<br>
+        Sherubtse College<br>
+        Trashigang, BHUTAN<br>
+        justlittetoxic@gmail.com<br>
+        17948009</p>
+    </footer>
+
+    <script>
+        // Timer function
+        let timeLeft = 1200; // Time in seconds
+        const timerDisplay = document.getElementById('time');
+
+        const timer = setInterval(() => {
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                document.getElementById('submit-btn').click(); // Auto submit the quiz when time runs out
+            } else {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+                timeLeft--;
+            }
+        }, 1000); // Update every second
+
+        document.getElementById('submit-btn').addEventListener('click', function() {
+            // Initialize variables
+            let score = 0;
+            const wrongAnswers = [];
+            const totalQuestions = 20; // Total number of questions
+            
+            const correctAnswers = {
+                q1: 'b',
+                q2: 'b',
+                q3: 'c',
+                q4: 'a',
+                q5: 'a',
+                q6: 'c',
+                q7: 'b',
+                q8: 'b',
+                q9: 'b',
+                q10: 'a',
+                q11: 'b',
+                q12: 'a',
+                q13: 'c',
+                q14: 'b',
+                q15: 'b',
+                q16: 'a',
+                q17: 'b',
+                q18: 'a',
+                q19: 'b',
+                q20: 'a'
+            }; 
+
+            // Loop through the questions and check answers
+            for (let i = 1; i <= totalQuestions; i++) {
+                const userAnswer = document.querySelector(`input[name="q${i}"]:checked`);
+                if (userAnswer) {
+                    if (userAnswer.value === correctAnswers[`q${i}`]) {
+                        score++;
+                    } else {
+                        wrongAnswers.push(`Question ${i}: Correct answer is ${correctAnswers[`q${i}`]}`);
+                    }
+                } else {
+                    wrongAnswers.push(`Question ${i}: No answer selected`);
+                }
+            }
+
+            // Display results
+            document.getElementById('result').style.display = 'block'; // Show results section
+            document.getElementById('result').innerHTML = `<p>You scored ${score} out of ${totalQuestions}!</p>`;
+            
+            const wrongAnswersList = document.createElement('ul'); // Create an unordered list for wrong answers
+            wrongAnswers.forEach(answer => {
+                const li = document.createElement('li');
+                li.textContent = answer;
+                wrongAnswersList.appendChild(li);
+            });
+            document.getElementById('result').appendChild(wrongAnswersList); // Append list of wrong answers
+        });
+    </script>
+</body>
+</html>

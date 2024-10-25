@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>college logo</title>
+<img src="sherubtse.png" alt="sherubtse">
+<link rel="html.css" href="html">
+ <style>
+    .sherubtse.png {
+    width: 150px;
+    height: 150px;
+    background: #f6821f;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: background-color 2s ease-out;
+    transition:2s;
+    }
+    .sherubtse.png:hover {
+    border-radius: 50%;
+    transform: translate(50px, 50px);
+    background-color: #002060;
+    cursor: pointer;
+    }
+ </style>
+</head>
+</html>

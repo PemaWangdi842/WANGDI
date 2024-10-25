@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduQuiz - Physics Quiz</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Styling for scrollable quiz container */
+        .scrollable-container {
+            max-height: 300px; /* Adjustable value for height */
+            overflow-y: auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .question {
+            background: #fff;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+        #results {
+            display: none;
+            background: #fff;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="EduQuizlogo.png" alt="EduQuiz Logo">
+            <h1>Edu Quiz - Physics Quiz</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="Home.html">Home</a></li>
+                <li><a href="Quizzes.html">Quizzes</a></li>
+                <li><a href="Contact.html">Contact</a></li>
+                <li><a href="Feedback.html">Feedback</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2 id="subject-name">Physics Quiz</h2>
+        <div id="timer">Time left: <span id="time">30:00</span></div> <!-- Timer display -->
+        <form id="quiz-form">
+            <div class="scrollable-container" id="questions-container">
+                <!-- Questions will be populated here -->
+            </div>
+            <button type="button" id="add-question-btn">Add Question</button> <!-- Add Question Button -->
+            <button type="submit">Submit Quiz</button>
+        </form>
+
+        <div id="results">
+            <h3>Your Results:</h3>
+            <p id="score"></p>
+            <ul id="wrongAnswers"></ul>
+        </div>
+    </main>
+
+    <footer>
+        <img src="EduQuizlogo.png" alt="EduQuiz Logo">
+        <p>EduQuiz Developers<br>
+        Sherubtse College<br>
+        Trashigang, BHUTAN<br>
+        justlittetoxic@gmail.com<br>
+        17948009</p>
+    </footer>
+
+    <script>
+        // Timer function
+        let timeLeft = 1800; // Time in seconds (30 minutes)
+        const timerDisplay = document.getElementById('time');
+
+        const timer = setInterval(() => {
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                document.getElementById('quiz-form').dispatchEvent(new Event('submit')); // Auto submit the quiz when time runs out
+            } else {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+                timeLeft--;
+            }
+        }, 1000); // Update every second
+
+        const physicsQuestions = [
+            { question: "What is the SI unit of force?", answers: ["Newton", "Pascal", "Joule", "Watt"], correct: "Newton" },
+            { question: "What does Ohm's law state?", answers: ["V = IR", "F = ma", "P = VI", "E = mc²"], correct: "V = IR" },
+            { question: "What is the principle of conservation of energy?", answers: ["Energy cannot be created or destroyed", "Energy can be created from nothing", "Energy is always lost as heat", "Energy can be transformed into mass"], correct: "Energy cannot be created or destroyed" },
+            { question: "What is the frequency of a wave if its period is 0.02 seconds?", answers: ["50 Hz", "100 Hz", "200 Hz", "25 Hz"], correct: "50 Hz" },
+            { question: "What is the escape velocity from the surface of the Earth?", answers: ["7.9 km/s", "11.2 km/s", "9.8 km/s", "5.0 km/s"], correct: "11.2 km/s" },
+            { question: "Which of the following is a scalar quantity?", answers: ["Velocity", "Force", "Mass", "Acceleration"], correct: "Mass" },
+            { question: "What is the law of reflection?", answers: ["Angle of incidence equals angle of reflection", "Angle of incidence is less than angle of reflection", "Angle of incidence is greater than angle of reflection", "Angle of incidence is 90 degrees"], correct: "Angle of incidence equals angle of reflection" },
+            { question: "What is the unit of electric charge?", answers: ["Coulomb", "Ampere", "Volt", "Ohm"], correct: "Coulomb" },
+            { question: "What is the value of Planck's constant?", answers: ["6.626 × 10^-34 J·s", "9.11 × 10^-31 kg", "3.00 × 10^8 m/s", "1.60 × 10^-19 C"], correct: "6.626 × 10^-34 J·s" },
+            { question: "What does the term 'quantum' refer to?", answers: ["A specific amount of energy", "The speed of light", "An electric current", "A type of wave"], correct: "A specific amount of energy" },
+            { question: "What is the formula for kinetic energy?", answers: ["KE = mv²", "KE = 1/2 mv²", "KE = mgh", "KE = Fd"], correct: "KE = 1/2 mv²" },
+            { question: "What is the speed of light in a vacuum?", answers: ["3.00 × 10^8 m/s", "1.50 × 10^8 m/s", "3.00 × 10^6 m/s", "1.00 × 10^8 m/s"], correct: "3.00 × 10^8 m/s" },
+            { question: "What is the Doppler effect?", answers: ["Change in frequency due to motion of source or observer", "Change in wavelength of light", "The phenomenon of diffraction", "The bending of light"], correct: "Change in frequency due to motion of source or observer" },
+            { question: "What is the formula for the electric field due to a point charge?", answers: ["E = k(q/r²)", "E = F/q", "E = V/d", "E = mc²"], correct: "E = k(q/r²)" },
+            { question: "What is the unit of power?", answers: ["Joule", "Watt", "Newton", "Coulomb"], correct: "Watt" },
+            { question: "Which of the following is a fundamental force?", answers: ["Gravity", "Friction", "Tension", "Normal"], correct: "Gravity" },
+            { question: "What does a convex lens do to parallel rays of light?", answers: ["Diverges them", "Converges them", "Scatters them", "Absorbs them"], correct: "Converges them" },
+            { question: "What is the formula for the period of a simple pendulum?", answers: ["T = 2π√(L/g)", "T = L/g", "T = g/L", "T = 2πL/g"], correct: "T = 2π√(L/g)" },
+            { question: "What is a photon?", answers: ["A particle of light", "A type of wave", "A charged particle", "An electron"], correct: "A particle of light" },
+            { question: "What is the gravitational force between two masses inversely proportional to?", answers: ["The distance between their centers", "The product of their masses", "The sum of their masses", "The square of their distance"], correct: "The square of their distance" }
+        ];
+
+        const newQuestions = []; // Array to store newly added questions
+
+        // Load questions into the quiz
+        function loadQuestions() {
+            const container = document.getElementById('questions-container');
+            physicsQuestions.forEach((q, index) => {
+                addQuestionToContainer(q, index);
+            });
+        }
+
+        function addQuestionToContainer(q, index) {
+            const container = document.getElementById('questions-container');
+            const questionDiv = document.createElement('div');
+            questionDiv.className = 'question';
+            questionDiv.innerHTML = `<p>${index + 1}. ${q.question}</p>`;
+            q.answers.forEach(answer => {
+                questionDiv.innerHTML += `
+                    <input type="radio" name="question${index}" value="${answer}" required>
+                    <label>${answer}</label><br>
+                `;
+            });
+            container.appendChild(questionDiv);
+        }
+
+        // Handle adding new question
+        document.getElementById('add-question-btn').addEventListener('click', function() {
+            const newQuestion = prompt("Enter your question:");
+            const newAnswers = [];
+            for (let i = 0; i < 4; i++) {
+                const answer = prompt(`Enter answer ${i + 1}:`);
+                newAnswers.push(answer);
+            }
+            const correctAnswer = prompt("Enter the correct answer:");
+            newQuestions.push({ question: newQuestion, answers: newAnswers, correct: correctAnswer });
+            addQuestionToContainer(newQuestions[newQuestions.length - 1], physicsQuestions.length + newQuestions.length - 1);
+        });
+
+        // Handle form submission
+        document.getElementById('quiz-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            clearInterval(timer); // Stop the timer
+            calculateScore();
+        });
+
+        // Calculate and display score
+        function calculateScore() {
+            const totalQuestions = physicsQuestions.length + newQuestions.length; // Total questions
+            let correctAnswers = 0;
+            const wrongAnswers = [];
+
+            physicsQuestions.concat(newQuestions).forEach((q, index) => {
+                const selectedAnswer = document.querySelector(`input[name="question${index}"]:checked`);
+                if (selectedAnswer) {
+                    if (selectedAnswer.value === q.correct) {
+                        correctAnswers++;
+                    } else {
+                        wrongAnswers.push(`Q${index + 1}: Correct Answer: ${q.correct}`);
+                    }
+                }
+            });
+
+            // Display results
+            document.getElementById('score').textContent = `You scored ${correctAnswers} out of ${totalQuestions}.`;
+            document.getElementById('wrongAnswers').innerHTML = wrongAnswers.map(item => `<li>${item}</li>`).join('');
+            document.getElementById('results').style.display = 'block';
+        }
+
+        // Load questions on page load
+        window.onload = loadQuestions;
+    </script>
+</body>
+</html>

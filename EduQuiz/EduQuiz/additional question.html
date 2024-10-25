@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Add Additional Quizzes</title>
+    <style>
+        /* Basic page styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #87ceeb; /* Light blue color */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensures footer is at the bottom */
+        }
+
+        /* Center header and footer */
+        header,
+        footer {
+            background-color: #87CEEB; /* Light blue background */
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Header logo and navigation styling */
+        header .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        header .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        header h1 {
+            color: black;
+            font-size: 1.8rem;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline-block;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            background-color: #D291FF; /* Pinkish purple buttons */
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 20px;
+        }
+
+        nav ul li a:hover {
+            background-color: #F4A9FF; /* Lighter pink on hover */
+        }
+
+        /* Container to center the form */
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            text-align: left;
+            box-sizing: border-box;
+            margin: 20px auto;
+            flex: 1;
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: #87CEEB;
+            text-align: center;
+            padding: 10px;
+            color: black;
+        }
+
+        footer img {
+            height: 40px;
+        }
+
+        footer p {
+            margin: 10px 0;
+            color: black;
+            font-size: 1rem;
+        }
+
+        /* Form styling */
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        /* Message styling */
+        .message {
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: none;
+            text-align: center;
+        }
+
+        /* Quiz question styling */
+        .quiz-question {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Additional styling for links and lists */
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="EduQuizlogo.png" alt="EduQuiz Logo">
+            <h1>Edu Quiz</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="Home.html">Home</a></li>
+                <li><a href="Quizzes.html">Quizzes</a></li>
+                <li><a href="Contact.html">Contact</a></li>
+                <li><a href="additional question.html">Additional Questions</a></li>
+                <li><a href="Feedback.html">Feedback</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Edu Quiz</h1>
+        <form id="quizForm">
+            <label for="question">Question:</label>
+            <input type="text" id="question" required>
+
+            <label for="option1">Option 1:</label>
+            <input type="text" id="option1" required>
+
+            <label for="option2">Option 2:</label>
+            <input type="text" id="option2" required>
+
+            <label for="option3">Option 3:</label>
+            <input type="text" id="option3" required>
+
+            <label for="option4">Option 4:</label>
+            <input type="text" id="option4" required>
+
+            <label for="correct">Correct Answer (Option 1-4):</label>
+            <select id="correct">
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+                <option value="3">Option 3</option>
+                <option value="4">Option 4</option>
+            </select>
+
+            <label for="subject">Subject:</label>
+            <select id="subject">
+                <option value="math">Math</option>
+                <option value="Grammar">Grammar</option>
+                <option value="history">History</option>
+                <option value="geography">Geography</option>
+                <option value="biology">Biology</option>
+                <option value="chemistry">chemistry</option>
+                <option value="physics">physics</option>
+                <option value="accountancy">Accountancy</option>
+                <option value="commerce">Commerce</option>
+                <option value="economics">Economics</option>
+                <option value="environmental science">Environmental Science</option>
+                <option value="general knowledge">General Knowledge</option>
+            </select>
+
+            <button type="button" onclick="addQuiz()">Add Quiz</button>
+        </form>
+
+        <h3>Subjects:</h3>
+        <ul>
+            <li><a href="Math.html" onclick="showQuizzes('math')">Math</a></li>
+            <li><a href="grammar.html" onclick="showQuizzes('Grammar')">Grammar</a></li>
+            <li><a href="history.HTML" onclick="showQuizzes('history')">History</a></li>
+            <li><a href="geography.HTML" onclick="showQuizzes('geography')">Geography</a></li>
+            <li><a href="biology.html" onclick="showQuizzes('Biology')">Biology</a></li>
+            <li><a href="chemistry.html" onclick="showQuizzes('chemistry')">Chemistry</a></li>
+            <li><a href="physics.html" onclick="showQuizzes('physics')">Physics</a></li>
+            <li><a href="accountancy.html" onclick="showQuizzes('Accountancy')">Accountancy</a></li>
+            <li><a href="commerce.html" onclick="showQuizzes('commerce')">commerce</a></li>
+            <li><a href="economics.html" onclick="showQuizzes('economics')">Economics</a></li>
+            <li><a href="environmental science.html" onclick="showQuizzes('Environmental science')">Environmental Science</a></li>
+            <li><a href="general knowledge.html" onclick="showQuizzes('general knowledge')">General Knowledge</a></li>
+        </ul>
+
+        <div id="quizDisplay"></div>
+        <div id="message" class="message"></div>
+    </div>
+
+    <footer>
+        <img src="EduQuizlogo.png" alt="EduQuiz Logo">
+        <p>EduQuiz Developers<br>
+            Sherubtse College<br>
+            Trashigang, BHUTAN<br>
+            justlittetoxic@gmail.com<br>
+            17948009
+        </p>
+    </footer>
+
+    <script>
+        let quizzes = {
+            math: [],
+            science: [],
+            history: [],
+            geography: []
+        };
+
+        function addQuiz() {
+            const question = document.getElementById("question").value;
+            const option1 = document.getElementById("option1").value;
+            const option2 = document.getElementById("option2").value;
+            const option3 = document.getElementById("option3").value;
+            const option4 = document.getElementById("option4").value;
+            const correct = document.getElementById("correct").value;
+            const subject = document.getElementById("subject").value;
+
+            const quiz = {
+                question: question,
+                options: [option1, option2, option3, option4],
+                correctAnswer: correct
+            };
+
+            quizzes[subject].push(quiz);
+
+            document.getElementById("quizForm").reset();
+
+            const message = document.getElementById("message");
+            message.textContent = "Quiz added successfully!";
+            message.style.color = "green";
+            message.style.display = "block";
+            setTimeout(() => {
+                message.style.display = "none";
+            }, 3000);
+
+            showQuizzes(subject);
+        }
+
+        function showQuizzes(subject) {
+            const quizDisplay = document.getElementById("quizDisplay");
+            quizDisplay.innerHTML = `<h3>${subject.charAt(0).toUpperCase() + subject.slice(1)} Quizzes:</h3>`;
+
+            const subjectQuizzes = quizzes[subject];
+
+            if (subjectQuizzes.length === 0) {
+                quizDisplay.innerHTML += "<p>No quizzes available for this subject.</p>";
+                return;
+            }
+
+            subjectQuizzes.forEach((quiz, index) => {
+                quizDisplay.innerHTML += `
+                    <div class="quiz-question">
+                        <p><strong>Question ${index + 1}:</strong> ${quiz.question}</p>
+                        <ol>
+                            <li>${quiz.options[0]}</li>
+                            <li>${quiz.options[1]}</li>
+                            <li>${quiz.options[2]}</li>
+                            <li>${quiz.options[3]}</li>
+                        </ol>
+                        <p><strong>Correct Answer:</strong> Option ${quiz.correctAnswer}</p>
+                    </div>
+                `;
+            });
+        }
+    </script>
+</body>
+
+</html>
